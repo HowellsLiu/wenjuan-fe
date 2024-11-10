@@ -16,58 +16,64 @@ import Stat from "../pages/question/Stat";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <MainLayout />,
     children: [
       {
-        path: "/",
+        path: '/',
         element: <Home />,
       },
       {
-        path: "login",
-        element: <Login></Login>,
+        path: 'login',
+        element: <Login />,
       },
       {
-        path: "register",
-        element: <Register></Register>,
+        path: 'register',
+        element: <Register />,
       },
       {
-        path: "manage",
+        path: 'manage',
         element: <ManageLayout />,
         children: [
           {
-            path: "list",
-            element: <List></List>,
+            path: 'list',
+            element: <List />,
           },
           {
-            path: "star",
+            path: 'star',
             element: <Star />,
           },
           {
-            path: "trash",
+            path: 'trash',
             element: <Trash />,
           },
         ],
       },
+      {
+        path: '*', // 404 路由配置，都写在最后（兜底）
+        element: <NotFound />,
+      },
     ],
   },
   {
-    path: "question",
-    element: <QuestionLayout></QuestionLayout>,
+    path: 'question',
+    element: <QuestionLayout />,
     children: [
       {
-        path: "edit/:id",
-        element: <Edit></Edit>,
+        path: 'edit/:id',
+        element: <Edit />,
       },
       {
-        path: "stat:/id",
-        element: <Stat></Stat>,
+        path: 'stat/:id', // statistic 统计
+        element: <Stat />,
       },
     ],
-  },
-  {
-    path: "*",
-    element: <NotFound></NotFound>,
   },
 ]);
 export default router;
+//---------------分割线---------------
+// 常用的路由用常量表示
+export const LOGIN_PATHNAME = '/login'
+export const REGISTER_PATHNAME = '/register'
+export const HOME_PATHNAME = '/'
+export const MANAGE_INDEX_PATHNAME = '/manage/list'

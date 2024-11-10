@@ -1,13 +1,21 @@
-.container {
-  padding: 24px 0;
-  width: 1200px;
-  margin: 0 auto;
-  display: flex;
+.header {
+  padding: 0 24px;
+
+  .left {
+      float: left;
+  }
+
+  .right {
+      float: right
+  }
 }
-.left {
-  width: 120px;
+
+.main {
+  min-height: calc(100vh - 64px - 65px);
 }
-.right {
-  flex: 1;
-  margin-left: 60px;
+
+.footer {
+  text-align: center;
+  background-color: #f7f7f7;
+  border-top: 1px solid #e8e8e8;
 }
