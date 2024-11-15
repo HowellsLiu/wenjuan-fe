@@ -1,14 +1,23 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Button, Typography } from "antd";
 import { MANAGE_INDEX_PATHNAME } from "../router";
-import styles from './Home.module.scss'
+import styles from "./Home.module.scss";
+// import "../_mock/index.ts";
+import axios from "axios";
 const { Title, Paragraph } = Typography;
-
 
 const Home: FC = () => {
   // 第三方Hook
   const nav = useNavigate();
+  useEffect(() => {}, []);
+  // useEffect(() => {
+  //   // fetch("/api/test")
+  //   //   .then((res) => res.json())
+  //   //   .then((data) => console.log("fetch data", data));
+  //   // mock.js 只能劫持XMLHttpRequest, 不能劫持fetch
+  //   axios.get("api/test").then((res) => console.log("axios res", res.data));
+  // }, []);
   // function clickHandler() {
   //   // nav('/login?b=20')
   //   nav({
@@ -16,6 +25,11 @@ const Home: FC = () => {
   //     search: "b=21",
   //   });
   // }
+  useEffect(() => {
+    fetch("/api/test")
+      .then((res) => res.json())
+      .then((data) => console.log("fetch data", data));
+  }, []);
   return (
     <div className={styles.container}>
       <div className={styles.info}>
