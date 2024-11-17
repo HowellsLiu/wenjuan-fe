@@ -1,11 +1,22 @@
 import React, { FC, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Login.module.scss";
-import { Space, Typography, Form, Input, Button, Checkbox } from "antd";
+import {
+  Space,
+  Typography,
+  Form,
+  Input,
+  Button,
+  Checkbox,
+  message,
+} from "antd";
 import { UserAddOutlined } from "@ant-design/icons";
-import { REGISTER_PATHNAME } from "../router";
+import { MANAGE_INDEX_PATHNAME, REGISTER_PATHNAME } from "../router";
 import { Link } from "react-router-dom";
 import Password from "antd/es/input/Password";
+import { loginService } from "../services/user";
+import { useRequest } from "ahooks";
+import { setTOKEN } from "../utils/user-token";
 const { Title } = Typography;
 const USERNAME_KEY = "USERNAME";
 const PASSWORD_KEY = "PASSWORD";
@@ -24,14 +35,31 @@ function getUserInfoFormStorage() {
   };
 }
 const Login: FC = () => {
+  const nav = useNavigate();
   const [form] = Form.useForm();
   useEffect(() => {
     const { username, password } = getUserInfoFormStorage();
     form.setFieldsValue({ username, password });
   }, []);
+  const { run } = useRequest(
+    async (username: string, password: string) => {
+      const data = await loginService(username, password);
+      return data;
+    },
+    {
+      manual: true,
+      onSuccess(result) {
+        const {token=''} = result
+        setTOKEN(token)
+        message.success("登录成功");
+        nav(MANAGE_INDEX_PATHNAME); // 导航到我的问卷
+      },
+    }
+  );
   const onFinish = (values: any) => {
     // console.log(values);
     const { username, password, remember } = values;
+    run(username, password); // 执行ajax
     if (remember) {
       rememberUser(username, password);
     } else {
