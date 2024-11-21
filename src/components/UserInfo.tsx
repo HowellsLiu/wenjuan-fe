@@ -6,11 +6,18 @@ import { useRequest } from "ahooks";
 import { UserOutlined } from "@ant-design/icons";
 import { Button, message, Space, Spin } from "antd";
 import { removeTOKEN } from "../utils/user-token";
+import useGetUserInfo from "../hooks/useGetUserInfo";
+import {useDispatch} from "react-redux";
+import {logoutReducer} from "../store/userReducer";
+
 const UserInfo: FC = () => {
   const nav = useNavigate();
-  const { data } = useRequest(getUserInfoService);
-  const { username, nickname } = data || {};
+  const dispatch = useDispatch();
+  // const { data } = useRequest(getUserInfoService);
+  // const { username, nickname } = data || {};
+  const {username,nickname} = useGetUserInfo()
   function logout() {
+    dispatch(logoutReducer()) // 清空了 redux user 数据
     // 清空token的存储
     removeTOKEN();
     message.success("退出成功");
