@@ -4,7 +4,11 @@ import { copySelectedComponent, pasteCopiedComponent, removeSelectedComponent, s
 // 判断activeElement是否合法
 function isActiveElementValid(){
     const activeElem = document.activeElement
-    if(activeElem===document.body) return true //光标没有focus到input
+    // 没有增加dnd-kit之前
+    // if(activeElem===document.body) return true //光标没有focus到input
+    // 增加了dnd-kit以后
+    if(activeElem===document.body) return true
+    if(activeElem?.matches('div[role="button"]')) return true
     return false
 }
 function useBindCanvasKeyPress() {
