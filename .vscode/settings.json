@@ -3,7 +3,9 @@
         "ahooks",
         "antd",
         "craco",
+        "downarrow",
         "mockjs",
-        "Popconfirm"
+        "Popconfirm",
+        "uparrow"
     ]
 }

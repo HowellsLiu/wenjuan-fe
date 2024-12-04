@@ -17,7 +17,7 @@ import {
 import { useNavigate, Link } from "react-router-dom";
 import { useRequest } from "ahooks";
 type propsType = {
-  _id: string;
+  _id: string;// 服务端mongodb, 自动_id 不重复,在服务端创建问卷
   title: string;
   isPublished: boolean;
   isStar: boolean;
