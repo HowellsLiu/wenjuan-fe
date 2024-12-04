@@ -7,6 +7,8 @@ import {
   DownOutlined,
   EyeInvisibleOutlined,
   LockOutlined,
+  RedoOutlined,
+  UndoOutlined,
   UpOutlined,
 } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
@@ -19,6 +21,7 @@ import {
   moveComponent,
 } from "../../../store/componentsReducer";
 import useGetComponentInfo from "../../../hooks/useGetComponentInfo";
+import { ActionCreators as UndoActionCreators } from "redux-undo";
 const EditToolbar: FC = () => {
   const dispatch = useDispatch();
   const { selectedId, componentList, selectedComponent, copiedComponent } =
@@ -62,6 +65,14 @@ const EditToolbar: FC = () => {
       dispatch(
         moveComponent({ oldIndex: selectedIndex, newIndex: selectedIndex + 1 })
       );
+    }
+    // 撤销
+    function undo(){
+      dispatch(UndoActionCreators.undo())
+    }
+    // 重做
+    function redo(){
+      dispatch(UndoActionCreators.redo())
     }
   return (
     <Space>
@@ -112,6 +123,20 @@ const EditToolbar: FC = () => {
           icon={<DownOutlined />}
           onClick={moveDown}
           disabled={isLast}
+        ></Button>
+      </Tooltip>
+      <Tooltip title="撤销">
+        <Button
+          shape="circle"
+          icon={<UndoOutlined />}
+          onClick={undo}
+        ></Button>
+      </Tooltip>
+      <Tooltip title="重做">
+        <Button
+          shape="circle"
+          icon={<RedoOutlined />}
+          onClick={redo}
         ></Button>
       </Tooltip>
     </Space>
