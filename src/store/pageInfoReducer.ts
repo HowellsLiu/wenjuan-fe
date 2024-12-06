@@ -5,6 +5,7 @@ export type PageInfoType = {
   desc?: string;
   js?: string;
   css?: string;
+  isPublished?: boolean;
 };
 const INIT_STATE: PageInfoType = {
   title: "",
@@ -29,5 +30,5 @@ const PageInfoSlice = createSlice({
     ),
   },
 });
-export const { resetPageInfo, changePageTitle} = PageInfoSlice.actions;
+export const { resetPageInfo, changePageTitle } = PageInfoSlice.actions;
 export default PageInfoSlice.reducer;

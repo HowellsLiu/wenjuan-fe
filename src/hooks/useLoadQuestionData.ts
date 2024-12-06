@@ -29,6 +29,7 @@ function useLoadQuestionData() {
       desc = "",
       js = "",
       css = "",
+      isPublished=false
     } = data;
     // 把componentList存储到Redux Store中
     // 获取默认的selectedId
@@ -40,7 +41,7 @@ function useLoadQuestionData() {
       resetComponents({ componentList, selectedId, copiedComponent: null })
     );
     // 把pageInfo存储到Redux store中
-    dispatch(resetPageInfo({ title, desc, js, css }));
+    dispatch(resetPageInfo({ title, desc, js, css,isPublished }));
   }, [data]);
   // 根据id变化来监听数据, id变了就重新加载数据
   useEffect(() => {
